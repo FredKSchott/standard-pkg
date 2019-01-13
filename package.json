@@ -3,16 +3,27 @@
   "version": "0.1.0",
   "license": "MIT",
   "distributions": {
-    "src": [true],
+    "src": [
+      true
+    ],
     "plugins": [
-      ["@pika/node-builder"],
-      ["@pika/types-builder"],
-      ["@pika/add-bin", {"bin": "stdpkg"}]
+      [
+        "@pika/node-builder"
+      ],
+      [
+        "@pika/types-builder"
+      ],
+      [
+        "@pika/add-bin",
+        {
+          "bin": "stdpkg"
+        }
+      ]
     ]
   },
   "scripts": {
-      "build": "../pika-build/pkg/dist-node/index.bin.js build",
-      "prepublishOnly": "npm run build"
+    "build": "pika build",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@babel/parser": "^7.1.5",
@@ -38,6 +49,7 @@
     "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@pika/add-bin": "^0.1.2",
     "@pika/node-builder": "^0.1.2",
+    "@pika/pack": "^0.1.0",
     "@pika/types-builder": "^0.1.2",
     "prettier": "^1.15.3",
     "typescript": "^3.2.2"
