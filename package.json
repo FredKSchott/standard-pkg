@@ -7,7 +7,7 @@
     "plugins": [
       ["@pika/node-builder"],
       ["@pika/types-builder"],
-      ["@pika/add-bin", {"bin": "pika"}]
+      ["@pika/add-bin", {"bin": "stdpkg"}]
     ]
   },
   "scripts": {
