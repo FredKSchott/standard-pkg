@@ -1,24 +1,13 @@
 {
-  "name": "@pika/build",
+  "name": "standard-pkg",
   "version": "0.1.0",
   "license": "MIT",
   "distributions": {
-    "src": [
-      true
-    ],
+    "src": [true],
     "plugins": [
-      [
-        "@pika/node-builder"
-      ],
-      [
-        "@pika/types-builder"
-      ],
-      [
-        "@pika/add-bin",
-        {
-          "bin": "pika"
-        }
-      ]
+      ["@pika/node-builder"],
+      ["@pika/types-builder"],
+      ["@pika/add-bin", {"bin": "pika"}]
     ]
   },
   "scripts": {
