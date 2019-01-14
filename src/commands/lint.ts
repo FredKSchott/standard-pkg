@@ -87,6 +87,10 @@ export class Lint {
       this.reporter.log(this.reporter.lang('validationErrors', this.totalNum));
     }
   }
+
+  exitCode() {
+    return this.totalNum === 0 ? 0 : 1;
+  }
 }
 
 export function setFlags(commander: Command) {
@@ -97,11 +101,12 @@ export function hasWrapper(commander: Command, args: Array<string>): boolean {
   return true;
 }
 
-export async function run(config: Config, reporter: Reporter, flags: Flags, args: Array<string>): Promise<void> {
+export async function run(config: Config, reporter: Reporter, flags: Flags, args: Array<string>): Promise<number> {
   const {cwd} = config;
   const dir = args.length > 0 ? path.resolve(cwd, args[0]) : 'pkg/';
   const linter = new Lint(dir, flags, config, reporter);
   await linter.init();
   console.log(``);
   linter.summary();
+  return linter.exitCode();
 }
