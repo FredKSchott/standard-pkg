@@ -22,7 +22,7 @@ export default function validate(code: string, fileLoc: string, cwd: string): an
         errors.add(
           `${getLineCol(
             path.node,
-          )} "${specifier}": Valid imports must use a file path, including the ".js" file extension.`,
+          )} "${specifier}": Valid relative imports must include the ".js" file extension.`,
         );
       }
       const absPathToImport = nodePath.resolve(nodePath.dirname(fileLoc), specifier);
@@ -63,7 +63,7 @@ export default function validate(code: string, fileLoc: string, cwd: string): an
         );
       }
       if (path.node.name === 'require' && path.parent.type !== 'CallExpression') {
-        errors.add(`${getLineCol(path.node)} \`require()\` is not a valid ESM global. Use \`import\` instead.`);
+        errors.add(`${getLineCol(path.node)} \`require()\` is not a valid ESM global. Use \`import()\` instead.`);
       }
       if (
         path.node.name === 'module' &&
@@ -91,7 +91,7 @@ export default function validate(code: string, fileLoc: string, cwd: string): an
     },
     MetaProperty(path) {
       if (!path.parent.property || path.parent.property.name !== 'url') {
-        errors.add(`${getLineCol(path.node)} \`url\` is the only \`import.meta\` property currently supported.`);
+        errors.add(`${getLineCol(path.node)} \`url\` is the only \`import.meta\` property currently supported in spec.`);
       }
     },
   });
