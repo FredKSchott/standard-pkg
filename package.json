@@ -1,12 +1,21 @@
 {
   "name": "standard-pkg",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "@pika/pack": {
     "pipeline": [
-      ["../pika-builders/packages/plugin-ts-standard-pkg/pkg"],
-      ["@pika/node-builder"],
-      ["../pika-builders/packages/simple-bin/pkg", {"bin": "stdpkg"}]
+      [
+        "../pika-builders/packages/plugin-ts-standard-pkg/pkg"
+      ],
+      [
+        "@pika/node-builder"
+      ],
+      [
+        "../pika-builders/packages/simple-bin/pkg",
+        {
+          "bin": "stdpkg"
+        }
+      ]
     ]
   },
   "scripts": {
