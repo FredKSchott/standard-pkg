@@ -1,5 +1,5 @@
-import * as fs from './util/fs';
-import validateFile from './util/babel-validate-file';
+import * as fs from './util/fs.js';
+import validateFile from './util/babel-validate-file.js';
 import * as path from 'path';
 import chalk from 'chalk';
 

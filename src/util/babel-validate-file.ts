@@ -3,7 +3,7 @@ import {parse} from '@babel/parser';
 import traverse from '@babel/traverse';
 import chalk from 'chalk';
 import * as nodePath from 'path';
-import { validateDynamicImportArguments } from './babel-validate-specifier';
+import { validateDynamicImportArguments } from './babel-validate-specifier.js';
 
 function getLineCol(node: any): string {
   const loc = node.loc.start;
