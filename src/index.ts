@@ -56,7 +56,6 @@ export class Lint {
 
   summary() {
     if (this.totalNum === 0) {
-      console.log('No standard-pkg errors found.');
       return;
     }
     console.log(``);
@@ -76,6 +75,10 @@ export async function run(args: Array<string>): Promise<void> {
   const dir = path.resolve(process.cwd(), args.length > 2 ? args[2] : 'pkg/');
   const linter = new Lint(dir);
   await linter.init();
-  linter.summary();
+  if (linter.totalNum === 0) {
+    console.log('No standard-pkg errors found.');
+  } else {
+    linter.summary();
+  }
   process.exit(linter.exitCode());
 }
