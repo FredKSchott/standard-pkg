@@ -80,5 +80,6 @@ export async function run(args: Array<string>): Promise<void> {
   } else {
     linter.summary();
   }
+
   process.exit(linter.exitCode());
 }
