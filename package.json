@@ -2,6 +2,7 @@
   "name": "standard-pkg",
   "version": "0.2.1",
   "license": "MIT",
+  "repository": {"url": "https://github.com/pikapkg/stdpkg"},
   "@pika/pack": {
     "pipeline": [
       [
