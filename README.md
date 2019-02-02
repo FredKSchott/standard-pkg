@@ -38,7 +38,7 @@ $ standard-pkg --dist lib/
 ```
 
 
-### Connect Your Source To Existing Tools
+### Use Existing Tools with Experimental Language Features
 
 Builds to a standard language target for other tooling to consume (or to publish directly with your package). Especially useful if you're using TypeScript or experimental language features that your tooling may not support.
 
