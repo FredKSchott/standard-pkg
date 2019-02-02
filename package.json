@@ -1,6 +1,6 @@
 {
   "name": "standard-pkg",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/pikapkg/stdpkg"
