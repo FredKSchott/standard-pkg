@@ -1,7 +1,9 @@
-# standard-pkg
+<p align="center">
+  <img alt="Logo" src="https://i.imgur.com/MsQMjew.png" width="420">
+</p>
 
-- **Build standard, ES2018 package distributions.**
-- Updates yearly with the latest EcmaScript spec.
+- **Build strict, ES2018 distributions from your project.**
+- Updates yearly with the latest ECMAScript spec.
 - Powered by Babel; Uses your existing Babel config.
 
 ```
