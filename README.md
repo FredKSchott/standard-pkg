@@ -2,10 +2,6 @@
   <img alt="Logo" src="https://i.imgur.com/MsQMjew.png" width="420">
 </p>
 
-- **Build strict, ES2018 distributions from your project.**
-- Updates yearly with the latest ECMAScript spec.
-- Powered by Babel; Uses your existing Babel config.
-
 ```
 $ npm install -g standard-pkg
 $ standard-pkg --src src/ --dist lib/
@@ -13,6 +9,11 @@ $ standard-pkg --src src/ --dist lib/
   » Linting lib/...
   ✓ 0 issues found.
 ```
+
+- **Build strict, ES2018 distributions from your project.**
+- Updates yearly with the latest ECMAScript spec.
+- Powered by Babel; Uses your existing Babel config.
+
 
 ## Why?
 
