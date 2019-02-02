@@ -10,7 +10,7 @@ function getLineCol(node: any): string {
   return chalk.dim(`[${loc.line}:${loc.column}]`);
 }
 
-export default function validate(code: string, fileLoc: string, cwd: string): any {
+export default function validate(code: string, fileLoc: string, cwd: string, dist: string): any {
   const ast = parse(code, {plugins: ['dynamicImport', 'importMeta'], sourceType: 'module'});
   const errors = new Set();
 
@@ -27,14 +27,13 @@ export default function validate(code: string, fileLoc: string, cwd: string): an
       }
       const absPathToImport = nodePath.resolve(nodePath.dirname(fileLoc), specifier);
       const assetsPath = nodePath.join(cwd, 'assets');
-      const distSrcPath = nodePath.join(cwd, 'dist-src');
       if (!absPathToImport.startsWith(cwd)) {
         errors.add(
           `${getLineCol(path.node)} "${specifier}": Valid imports cannot reach outside of the current package.`,
         );
-      } else if (!absPathToImport.startsWith(assetsPath) && !absPathToImport.startsWith(distSrcPath)) {
+      } else if (!absPathToImport.startsWith(assetsPath) && !absPathToImport.startsWith(dist)) {
         errors.add(
-          `${getLineCol(path.node)} "${specifier}": Valid imports can only import from \`dist-src/\` or \`assets/\`.`,
+          `${getLineCol(path.node)} "${specifier}": Valid imports can only import from the dist directory or the sibling \`assets/\` directory.`,
         );
       }
       return errors;

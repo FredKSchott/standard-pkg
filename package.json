@@ -16,7 +16,7 @@
       [
         "@pika/plugin-simple-bin",
         {
-          "bin": "stdpkg"
+          "bin": "standard-pkg"
         }
       ]
     ]
@@ -25,16 +25,24 @@
     "build": "pika build"
   },
   "dependencies": {
+    "@babel/core": "^7.2.2",
     "@babel/parser": "^7.1.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-syntax-import-meta": "^7.2.0",
+    "@babel/preset-typescript": "^7.1.0",
     "@babel/traverse": "^7.1.5",
+    "@pika/babel-plugin-esm-import-rewrite": "^0.3.7",
+    "@types/minimist": "^1.2.0",
     "chalk": "^2.1.0",
-    "glob": "^7.1.1"
+    "glob": "^7.1.1",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "@pika/plugin-build-node": "^0.3.0",
-    "@pika/pack": "^0.2.1",
-    "@pika/plugin-ts-standard-pkg": "^0.3.0",
-    "@pika/plugin-simple-bin": "^0.3.0",
+    "@pika/pack": "^0.2.2",
+    "@pika/plugin-build-node": "^0.3.7",
+    "@pika/plugin-simple-bin": "^0.3.7",
+    "@pika/plugin-ts-standard-pkg": "^0.3.7",
     "@types/node": "^10.12.18",
     "prettier": "^1.15.3",
     "typescript": "^3.2.4"
