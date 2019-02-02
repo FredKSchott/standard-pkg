@@ -2,6 +2,10 @@
   <img alt="Logo" src="https://i.imgur.com/MsQMjew.png" width="420">
 </p>
 
+<p align="center">
+  <strong>standard-pkg</strong> • Build strict, ES2018 distributions from your project.
+</p>
+
 ```
 $ npm install -g standard-pkg
 $ standard-pkg --src src/ --dist lib/
@@ -10,9 +14,9 @@ $ standard-pkg --src src/ --dist lib/
   ✓ 0 issues found.
 ```
 
-- **Build strict, ES2018 distributions from your project.**
-- Updates yearly with the latest ECMAScript spec.
-- Powered by Babel; Uses your existing Babel config.
+- 🗓 Updates yearly with the latest ECMAScript spec.
+- ⚡️ Powered by Babel; Uses your existing Babel config.
+- 📦 Used by most [@pika/pack](https://github.com/pikapkg/pack) build pipelines.
 
 
 ## Why?
