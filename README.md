@@ -8,7 +8,7 @@
 
 - 🗓 Updates yearly with the latest ECMAScript spec.
 - ⚡️ Powered by Babel; Uses your existing Babel config.
-- 📦 Used by most [@pika/pack](https://github.com/pikapkg/pack) build pipelines.
+- 📦 Used internally by most [@pika/pack](https://github.com/pikapkg/pack) build pipelines.
 
 ```
 $ npm install -g standard-pkg
