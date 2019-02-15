@@ -38,13 +38,13 @@ export default function validate(code: string, fileLoc: string, cwd: string, dis
       }
       return errors;
     }
-    const parts = specifier.split('/').length;
-    if ((specifier.startsWith('@') && parts > 2) || (!specifier.startsWith('@') && parts > 1)) {
-      errors.add(
-        `${getLineCol(path.node)} "${specifier}": Avoid directly importing private files inside external packages.`,
-      );
-      return errors;
-    }
+    // const parts = specifier.split('/').length;
+    // if ((specifier.startsWith('@') && parts > 2) || (!specifier.startsWith('@') && parts > 1)) {
+    //   errors.add(
+    //     `${getLineCol(path.node)} "${specifier}": Avoid directly importing private files inside external packages.`,
+    //   );
+    //   return errors;
+    // }
 
     return errors;
   }
