@@ -38,6 +38,8 @@ export default function validate(code: string, fileLoc: string, cwd: string, dis
       }
       return errors;
     }
+
+    // NOTE(fks): Removed as "too opinionated" (rightfully!).
     // const parts = specifier.split('/').length;
     // if ((specifier.startsWith('@') && parts > 2) || (!specifier.startsWith('@') && parts > 1)) {
     //   errors.add(
