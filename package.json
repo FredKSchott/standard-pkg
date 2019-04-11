@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "pika-pack build",
-    "publish": "pika-pack publish"
+    "_publish": "pika-pack publish"
   },
   "dependencies": {
     "@babel/core": "^7.2.2",
