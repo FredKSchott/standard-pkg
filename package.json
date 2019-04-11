@@ -7,13 +7,22 @@
   },
   "@pika/pack": {
     "pipeline": [
-      ["@pika/plugin-ts-standard-pkg"],
-      ["@pika/plugin-build-node"],
-      ["@pika/plugin-simple-bin", {"bin": "standard-pkg"}]
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-simple-bin",
+        {
+          "bin": "standard-pkg"
+        }
+      ]
     ]
   },
   "scripts": {
-    "build": "pika build"
+    "build": "pika-pack build"
   },
   "dependencies": {
     "@babel/core": "^7.2.2",
@@ -30,7 +39,7 @@
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "@pika/pack": "^0.2.2",
+    "@pika/pack": "^0.3.6",
     "@pika/plugin-build-node": "^0.3.7",
     "@pika/plugin-simple-bin": "^0.3.7",
     "@pika/plugin-ts-standard-pkg": "^0.3.7",
