@@ -6,7 +6,7 @@
   <strong>standard-pkg</strong> • Build strict, ES2018 distributions from your project.
 </p>
 
-<!-- ignore -->
+<!-- ignore x2 -->
 
 - 🗓 Updates yearly with the latest ECMAScript spec.
 - ⚡️ Powered by Babel; Uses your existing Babel config.
