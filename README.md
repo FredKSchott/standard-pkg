@@ -6,6 +6,8 @@
   <strong>standard-pkg</strong> • Build strict, ES2018 distributions from your project.
 </p>
 
+<!-- ignore -->
+
 - 🗓 Updates yearly with the latest ECMAScript spec.
 - ⚡️ Powered by Babel; Uses your existing Babel config.
 - 📦 Used internally by most [@pika/pack](https://github.com/pikapkg/pack) build pipelines.
