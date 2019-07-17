@@ -10,6 +10,8 @@
 - ⚡️ Powered by Babel; Uses your existing Babel config.
 - 📦 Used internally by most [@pika/pack](https://github.com/pikapkg/pack) build pipelines.
 
+<!-- ignore me too -->
+
 ```
 $ npm install -g standard-pkg
 $ standard-pkg --src src/ --dist lib/
