@@ -165,7 +165,6 @@ export class Build {
         .replace('.mjs', '.js');
 
       const resultSrc = await babel.transformFileAsync(sourcePathAbs, {
-        cwd: dir,
         presets: [[babelPresetTypeScript]],
         plugins: [
           [babelPluginImportRewrite, {addExtensions: true}],
