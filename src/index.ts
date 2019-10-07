@@ -56,7 +56,7 @@ $ standard-pkg lint dist-src/
 // }).help();
 // console.log(argv);
 
-function log(fileName: string, errors: {msg: string, level: number}[]) {
+function log(fileName: string, errors: {msg: string; level: number}[]) {
   console.log(chalk.bold(fileName));
   for (const error of errors) {
     console.log(' ', error.level === 2 ? '⚠️ ' : '   ', error.msg);
@@ -64,15 +64,17 @@ function log(fileName: string, errors: {msg: string, level: number}[]) {
 }
 
 export class Lint {
-  constructor(dist: string) {
+  constructor(dist: string, {ignoreExtensions}: {ignoreExtensions?: boolean} = {}) {
     this.dist = dist;
     this.errors = new Map();
     this.totalNum = 0;
+    this.ignoreExtensions = ignoreExtensions || false;
   }
 
   dist: string;
   totalNum: number;
-  errors: Map<string, {loc?: string, msg: string, level: number}[]>;
+  errors: Map<string, {loc?: string; msg: string; level: number}[]>;
+  ignoreExtensions: boolean;
 
   private addError(filename: string, msg: string, level: number = 2) {
     const errors = this.errors.get(filename) || [];
@@ -84,7 +86,11 @@ export class Lint {
     const {dist} = this;
     const dir = path.join(dist, '..');
 
-    const files = await fs.glob(`**/*`, {cwd: dist, absolute: true, nodir: true});
+    const files = await fs.glob(`**/*`, {
+      cwd: dist,
+      absolute: true,
+      nodir: true,
+    });
     for (const fileLoc of files) {
       const relativePath = path.relative(path.join(dist, '..'), fileLoc);
       const extName = path.extname(fileLoc);
@@ -95,12 +101,15 @@ export class Lint {
         continue;
       }
       if (extName !== '.js') {
-        this.addError(relativePath, 'Only JavaScript files are expected in your dist-src/ distribution.');
+        this.addError(
+          relativePath,
+          'Only JavaScript files are expected in your dist-src/ distribution.',
+        );
         this.totalNum++;
         continue;
       }
       const fileContents = await fs.readFile(fileLoc);
-      const validateErrors = validateFile(fileContents, fileLoc, dir, dist);
+      const validateErrors = validateFile(fileContents, fileLoc, dir, dist, this.ignoreExtensions);
       for (const errMsg of validateErrors) {
         this.addError(relativePath, errMsg);
       }
@@ -124,7 +133,6 @@ export class Lint {
     return this.totalNum === 0 ? 0 : 1;
   }
 }
-
 
 export class Build {
   constructor(dir: string, options: any = {}) {
@@ -189,13 +197,24 @@ export async function run(argv: string[]): Promise<void> {
   const distDir = path.resolve(process.cwd(), typeof args.dist === 'string' ? args.dist : 'lib');
 
   if (args.src) {
-    console.log(chalk.bold.dim(`»`), chalk(`Building ${path.relative(process.cwd(), srcDir)}${path.sep} → ${path.relative(process.cwd(), distDir)}${path.sep}...`));
+    console.log(
+      chalk.bold.dim(`»`),
+      chalk(
+        `Building ${path.relative(process.cwd(), srcDir)}${path.sep} → ${path.relative(
+          process.cwd(),
+          distDir,
+        )}${path.sep}...`,
+      ),
+    );
     const builder = new Build(srcDir);
     await builder.init();
     await builder.write(distDir);
   }
 
-  console.log(chalk.bold.dim(`»`), chalk(`Linting ${path.relative(process.cwd(), distDir)}${path.sep}...`));
+  console.log(
+    chalk.bold.dim(`»`),
+    chalk(`Linting ${path.relative(process.cwd(), distDir)}${path.sep}...`),
+  );
   const linter = new Lint(distDir);
   await linter.init();
   if (linter.totalNum === 0) {

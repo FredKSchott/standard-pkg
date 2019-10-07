@@ -23,7 +23,7 @@ export const glob: (path: string, options?: Object) => Promise<Array<string>> = 
 // const readFileBuffer = util.promisify(fs.readFile);
 export const readFile = (path: string) => {
   return util.promisify(fs.readFile)(path, {encoding: 'utf-8'});
-}
+};
 
 // import stripBOM from 'strip-bom';
 

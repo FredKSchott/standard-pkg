@@ -9,7 +9,9 @@ function getLineCol(node: any): string {
 export function validateDynamicImportArguments(path): Set<string> {
   if (path.parent.arguments.length !== 1) {
     return new Set([
-      `${getLineCol(path.node)} "\`import()\` only accepts 1 argument, but got ${path.parent.arguments.length}`,
+      `${getLineCol(path.node)} "\`import()\` only accepts 1 argument, but got ${
+        path.parent.arguments.length
+      }`,
     ]);
   }
   const [argNode] = path.parent.arguments;

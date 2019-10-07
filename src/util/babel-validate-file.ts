@@ -3,22 +3,31 @@ import {parse} from '@babel/parser';
 import traverse from '@babel/traverse';
 import chalk from 'chalk';
 import * as nodePath from 'path';
-import { validateDynamicImportArguments } from './babel-validate-specifier.js';
+import {validateDynamicImportArguments} from './babel-validate-specifier.js';
 
 function getLineCol(node: any): string {
   const loc = node.loc.start;
   return chalk.dim(`[${loc.line}:${loc.column}]`);
 }
 
-export default function validate(code: string, fileLoc: string, cwd: string, dist: string): any {
-  const ast = parse(code, {plugins: ['dynamicImport', 'importMeta'], sourceType: 'module'});
-  const errors = new Set();
+export default function validate(
+  code: string,
+  fileLoc: string,
+  cwd: string,
+  dist: string,
+  ignoreExtensions: boolean,
+): Set<string> {
+  const ast = parse(code, {
+    plugins: ['dynamicImport', 'importMeta'],
+    sourceType: 'module',
+  });
+  const errors = new Set<string>();
 
   function validateSpecifier(specifier, path): Set<string> {
-    const errors = new Set();
+    const errors = new Set<string>();
 
     if (specifier.startsWith('./') || specifier.startsWith('../')) {
-      if (!specifier.endsWith('.js')) {
+      if (!ignoreExtensions && !specifier.endsWith('.js')) {
         errors.add(
           `${getLineCol(
             path.node,
@@ -29,11 +38,15 @@ export default function validate(code: string, fileLoc: string, cwd: string, dis
       const assetsPath = nodePath.join(cwd, 'assets');
       if (!absPathToImport.startsWith(cwd)) {
         errors.add(
-          `${getLineCol(path.node)} "${specifier}": Valid imports cannot reach outside of the current package.`,
+          `${getLineCol(
+            path.node,
+          )} "${specifier}": Valid imports cannot reach outside of the current package.`,
         );
       } else if (!absPathToImport.startsWith(assetsPath) && !absPathToImport.startsWith(dist)) {
         errors.add(
-          `${getLineCol(path.node)} "${specifier}": Valid imports can only import from the dist directory or the sibling \`assets/\` directory.`,
+          `${getLineCol(
+            path.node,
+          )} "${specifier}": Valid imports can only import from the dist directory or the sibling \`assets/\` directory.`,
         );
       }
       return errors;
@@ -55,23 +68,33 @@ export default function validate(code: string, fileLoc: string, cwd: string, dis
     Identifier(path) {
       if (path.node.name === '__dirname') {
         errors.add(
-          `${getLineCol(path.node)} \`__dirname\` is not a valid ESM global. Use \`import.meta.url\` instead.`,
+          `${getLineCol(
+            path.node,
+          )} \`__dirname\` is not a valid ESM global. Use \`import.meta.url\` instead.`,
         );
       }
       if (path.node.name === '__filename') {
         errors.add(
-          `${getLineCol(path.node)} \`__filename\` is not a valid ESM global. Use \`import.meta.url\` instead.`,
+          `${getLineCol(
+            path.node,
+          )} \`__filename\` is not a valid ESM global. Use \`import.meta.url\` instead.`,
         );
       }
       if (path.node.name === 'require' && path.parent.type !== 'CallExpression') {
-        errors.add(`${getLineCol(path.node)} \`require()\` is not a valid ESM global. Use \`import()\` instead.`);
+        errors.add(
+          `${getLineCol(
+            path.node,
+          )} \`require()\` is not a valid ESM global. Use \`import()\` instead.`,
+        );
       }
       if (
         path.node.name === 'module' &&
         path.parent.type !== 'MemberExpression' &&
         path.parent.type !== 'ObjectProperty'
       ) {
-        errors.add(`${getLineCol(path.node)} \`module\` is not a valid ESM global. Use \`export\` instead.`);
+        errors.add(
+          `${getLineCol(path.node)} \`module\` is not a valid ESM global. Use \`export\` instead.`,
+        );
       }
       // TODO: Lint against other node concepts?
     },
@@ -92,7 +115,11 @@ export default function validate(code: string, fileLoc: string, cwd: string, dis
     },
     MetaProperty(path) {
       if (!path.parent.property || path.parent.property.name !== 'url') {
-        errors.add(`${getLineCol(path.node)} \`url\` is the only \`import.meta\` property currently supported in spec.`);
+        errors.add(
+          `${getLineCol(
+            path.node,
+          )} \`url\` is the only \`import.meta\` property currently supported in spec.`,
+        );
       }
     },
   });
