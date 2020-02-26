@@ -153,7 +153,7 @@ export class Build {
       nodir: true,
       absolute: false,
       ignore: options.exclude || [],
-    })).filter(filepath => !filepath.endsWith('.d.ts') && !filepath.includes('README'));
+    })).filter(filepath => !filepath.endsWith('.d.ts') && !filepath.endsWith('.md'));
 
     for (const sourcePath of files) {
       const sourcePathAbs = path.join(dir, sourcePath);
