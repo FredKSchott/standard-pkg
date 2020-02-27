@@ -97,7 +97,7 @@ export class Lint {
       if (extName === '.map') {
         continue;
       }
-      if (fileLoc.includes('README')) {
+      if (fileLoc.endsWith('.md')) {
         continue;
       }
       if (extName !== '.js') {
@@ -109,7 +109,15 @@ export class Lint {
         continue;
       }
       const fileContents = await fs.readFile(fileLoc);
-      const validateErrors = validateFile(fileContents, fileLoc, dir, dist, this.ignoreExtensions);
+      
+      let validateErrors: Set<string>;
+      try {
+        validateErrors = validateFile(fileContents, fileLoc, dir, dist, this.ignoreExtensions);
+      } catch (e) {
+        console.log(`Error occured while validating file ${fileLoc}`);
+        throw new Error(e);
+      }
+
       for (const errMsg of validateErrors) {
         this.addError(relativePath, errMsg);
       }
