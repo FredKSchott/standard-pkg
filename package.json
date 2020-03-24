@@ -37,7 +37,7 @@
     "@types/minimist": "^1.2.0",
     "chalk": "^2.1.0",
     "glob": "^7.1.1",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.2",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
