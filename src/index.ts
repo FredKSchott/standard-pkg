@@ -8,6 +8,9 @@ import nodeFs from 'fs';
 import mkdirp from 'mkdirp';
 import babel from '@babel/core';
 import babelPluginDynamicImportSyntax from '@babel/plugin-syntax-dynamic-import';
+import babelPluginNullishCoalescingOperator from '@babel/plugin-syntax-nullish-coalescing-operator';
+import babelPluginOptionalChaining from '@babel/plugin-syntax-optional-chaining';
+import babelPluginBigint from '@babel/plugin-syntax-bigint';
 import babelPluginImportMetaSyntax from '@babel/plugin-syntax-import-meta';
 import babelPresetTypeScript from '@babel/preset-typescript';
 import babelPluginImportRewrite from '@pika/babel-plugin-esm-import-rewrite';
@@ -170,6 +173,9 @@ export class Build {
           [babelPluginImportRewrite, {addExtensions: true}],
           babelPluginDynamicImportSyntax,
           babelPluginImportMetaSyntax,
+          babelPluginNullishCoalescingOperator,
+          babelPluginOptionalChaining,
+          babelPluginBigint,
         ],
       });
       this.result.set(transformedPath, resultSrc.code);

@@ -29,8 +29,11 @@
   "dependencies": {
     "@babel/core": "^7.2.2",
     "@babel/parser": "^7.1.5",
+    "@babel/plugin-syntax-bigint": "^7.8.3",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
+    "@babel/plugin-syntax-nullish-coalescing-operator": "^7.8.3",
+    "@babel/plugin-syntax-optional-chaining": "^7.8.3",
     "@babel/preset-typescript": "^7.1.0",
     "@babel/traverse": "^7.1.5",
     "@pika/babel-plugin-esm-import-rewrite": "^0.6.1",
