@@ -100,7 +100,7 @@ export class Lint {
       if (extName === '.map') {
         continue;
       }
-      if (fileLoc.includes('README')) {
+      if (fileLoc.endsWith('.md')) {
         continue;
       }
       if (extName !== '.js') {
@@ -112,7 +112,15 @@ export class Lint {
         continue;
       }
       const fileContents = await fs.readFile(fileLoc);
-      const validateErrors = validateFile(fileContents, fileLoc, dir, dist, this.ignoreExtensions);
+      
+      let validateErrors: Set<string>;
+      try {
+        validateErrors = validateFile(fileContents, fileLoc, dir, dist, this.ignoreExtensions);
+      } catch (e) {
+        console.log(`Error occured while validating file ${fileLoc}`);
+        throw new Error(e);
+      }
+
       for (const errMsg of validateErrors) {
         this.addError(relativePath, errMsg);
       }
@@ -156,7 +164,7 @@ export class Build {
       nodir: true,
       absolute: false,
       ignore: options.exclude || [],
-    })).filter(filepath => !filepath.endsWith('.d.ts') && !filepath.includes('README'));
+    })).filter(filepath => !filepath.endsWith('.d.ts') && !filepath.endsWith('.md'));
 
     for (const sourcePath of files) {
       const sourcePathAbs = path.join(dir, sourcePath);
